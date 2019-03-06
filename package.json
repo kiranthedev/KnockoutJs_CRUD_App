@@ -1,0 +1,26 @@
+{
+ "name": "knockoutjs-",
+ "description": "sample Curd operations",
+ "version": "0.0.1",
+ "keywords": [
+  "knockoutjs",
+  "knockout",
+  "express",
+  "expressjs"
+ ],
+ "scripts": {
+  "run:app": "http-server -p 8081",
+  "run:server": "node server.js 8080",
+  "start": "npm run run:app & npm run run:server"
+ },
+ "dependencies": {
+  "cors": "2.8.5",
+  "express": "2.4.x",
+  "fs": "0.0.1-security",
+  "knockout": "^3.5.0"
+ },
+ "devDependencies": {
+  "http-server": "^0.11.1"
+ },
+ "main": "./server.js"
+}

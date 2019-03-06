@@ -1,0 +1,106 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="./assets/style.css"/>
+        
+
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" style="color:#fff">KnockOut Crud App</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a >Home</a></li>
+               
+              </ul>
+            </div>
+        </nav>
+        <div class="form-group">
+            <button type="button" class="btn btn-warning" data-bind="click: add">
+                <span class="glyphicon glyphicon-plus"></span> Add user
+            </button>
+            <button type="button" class="btn btn-success" data-bind="click: save">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save All
+            </button>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr class="heading">
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Marks</th>
+                    <th class="actions">Action</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: user">
+                <tr data-bind="click: $root.setSelected.bind($root, $data)">
+                    <td>
+                        <div data-bind="text: $data.name, visible: !$data.edit()"></div>
+                        <input data-bind="value: $data.name, visible: $data.edit" />
+                    </td>
+                    <td>
+                        <div data-bind="text: $data.emailAddress, visible: !$data.edit()"></div>
+                        <input data-bind="value: $data.emailAddress, visible: $data.edit" type="email" required />
+                    </td>
+                    <td>
+                        <div data-bind="text: $data.age, visible: !$data.edit()"></div>
+                        <input data-bind="value: $data.age, visible: $data.edit" type="number" />
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-edit" title="Edit" data-bind="visible: !$data.edit(), click: $root.toggleEdit.bind($root, $data, true)"></span>
+                        <span class="glyphicon glyphicon-ok" title="Save" data-bind="visible: $data.edit, click: $root.toggleEdit.bind($root, $data, false)"></span>
+                        <span class="glyphicon glyphicon-remove" title="Delete" data-bind="click: $root.delete.bind($root, $index)"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- ko if: $root.selected -->
+        <div class="panel panel-danger" data-bind="with: $root.selected">
+            <div class="panel-heading">
+                <h3 class="panel-title" data-bind="text: 'User Info- ' + name()"></h3>
+            </div>
+            <div class="panel-body" data-bind="html: bio, visible: !edit()"></div>
+            <textarea class="form-control" rows="5" data-bind="textInput: bio, visible: edit"></textarea>
+        </div>
+
+
+        <!-- /ko -->
+    </div>
+    <template id='service-credits-template'>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info">
+                <span data-bind="text: 'Service Credits for ' + user().name()"></span>
+                <span class="glyphicon glyphicon-plus pull-right" title="Add Service" data-bind="click: addService"></span>
+            </li>
+            <!-- ko foreach: user().services -->
+            <li class="list-group-item">
+                <span class="badge" data-bind="text: credit, visible: !edit(), click: startEdit"></span>
+                <input data-bind="value: credit, visible: edit, click: startEdit, event: {blur: stopEdit}" class="badge-edit"
+                    type="number" />
+                <span data-bind="text: name, visible: !edit(), click: startEdit"></span>
+                <select data-bind="options: $parent.serviceNames,
+                        visible: edit, value: name,
+                        click: startEdit, event: {blur: stopEdit}">
+
+                </select>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </template>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="view-model.js"></script>
+</body>
+
+</html>

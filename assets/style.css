@@ -1,0 +1,23 @@
+.list-group-item .badge-edit {
+    float: right;
+    width: 50px;
+}
+input[type="number"] {
+    width: 50px;
+}
+.actions {
+    width: 50px;
+}
+body{
+    background-image:url('blurred.jpg');
+}
+.navbar-inverse {
+    background-color: #062c3e;
+}
+.table{
+    background: #fff;
+}
+
+.heading{
+    font-size:40px;
+}
